@@ -10,7 +10,7 @@ if(isset($_POST['login'])){
 	$pe=$_POST['password'];
 	$ss->execute();
 	
-	if(!empty($eu) && !empty($pe) && $ss->fetch()>0){
+	if(!empty($eu) && !empty($pe) && $ss->fetch()>0 && filter_var($e, FILTER_VALIDATE_EMAIL)){
 		$_SESSION['email']=$_POST['email'];
 		header('Location:welcome.php');
 	}
@@ -21,7 +21,10 @@ if(isset($_POST['login'])){
 		$pwerr="Password required";
 	}elseif($ss->fetch()!==1){
 		$eerr="That account do not exist";
+	}elseif(!filter_var($e, FILTER_VALIDATE_EMAIL)){
+		$emailerr="Invalid email";
 	}
+	
 	
 }
 
@@ -34,7 +37,7 @@ if(isset($_POST['register'])){
 	$pw=$_POST['rpassword'];
 	$sss->execute();
 	
-	if(!empty($e) && !empty($pw) && $sss->fetch()<1){
+	if(!empty($e) && !empty($pw) && $sss->fetch()<1 && filter_var($e, FILTER_VALIDATE_EMAIL)){
 		$sql="INSERT INTO members (email,password)VALUES(?,?)";
 		$sss=mysqli_prepare($connect,$sql);
 		$sss->bind_param("s",$eq);
@@ -49,7 +52,10 @@ if(isset($_POST['register'])){
 		$passworderr="Choose a password";
 	}elseif($sss->fetch()>0){
 		$emailerr="That account exist";
+	}elseif(!filter_var($e, FILTER_VALIDATE_EMAIL)){
+		$emailerr="Invalid email";
 	}
+	
 	
 }
 
