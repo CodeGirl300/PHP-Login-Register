@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
 		$pwerr="Password required";
 	}elseif($ss->fetch()!==1){
 		$eerr="That account do not exist";
-	}elseif(!filter_var($e, FILTER_VALIDATE_EMAIL)){
+	}elseif(!filter_var($eu, FILTER_VALIDATE_EMAIL)){
 		$eerr="Invalid email";
 	}
 	
