@@ -22,7 +22,7 @@ if(isset($_POST['login'])){
 	}elseif($ss->fetch()!==1){
 		$eerr="That account do not exist";
 	}elseif(!filter_var($e, FILTER_VALIDATE_EMAIL)){
-		$emailerr="Invalid email";
+		$eerr="Invalid email";
 	}
 	
 	
