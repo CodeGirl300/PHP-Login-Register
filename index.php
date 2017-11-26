@@ -10,7 +10,7 @@ if(isset($_POST['login'])){
 	$pe=$_POST['password'];
 	$ss->execute();
 	
-	if(!empty($eu) && !empty($pe) && $ss->fetch()>0 && filter_var($e, FILTER_VALIDATE_EMAIL)){
+	if(!empty($eu) && !empty($pe) && $ss->fetch()>0){
 		$_SESSION['email']=$_POST['email'];
 		header('Location:welcome.php');
 	}
@@ -21,8 +21,6 @@ if(isset($_POST['login'])){
 		$pwerr="Password required";
 	}elseif($ss->fetch()!==1){
 		$eerr="That account do not exist";
-	}elseif(!filter_var($eu, FILTER_VALIDATE_EMAIL)){
-		$eerr="Invalid email";
 	}
 	
 	
